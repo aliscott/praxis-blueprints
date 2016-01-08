@@ -72,6 +72,15 @@ describe Praxis::View do
         end
       end
 
+      context 'when creating sub-CollectionViews referencing the same Blueprint' do
+        let(:view) { Person.views.fetch(:self_referential) }
+
+        it 'creates the sub-CollectionViews' do
+         contents[:friends].should be_kind_of(Praxis::CollectionView)
+         contents[:friends].contents.keys.should match_array([:friends])
+        end
+      end
+
     end
 
   end
